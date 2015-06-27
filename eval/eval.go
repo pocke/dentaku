@@ -13,9 +13,9 @@ type Rational struct {
 	Decom int
 }
 
-func (r Rational) String() string {
-	return fmt.Sprintf("%d/%d", r.Numer, r.Decom)
-}
+func (r Rational) String() string { return fmt.Sprintf("%d/%d", r.Numer, r.Decom) }
+func (r Rational) Float() float64 { return float64(r.Numer) / float64(r.Decom) }
+func (r Rational) Int() int       { return r.Numer / r.Decom }
 
 func (r Rational) Reduce() Rational {
 	n := gcd(r.Numer, r.Decom)
