@@ -3,6 +3,23 @@ Dentaku
 
 yacc learning.
 
+Installation
+---------------
+
+```sh
+go get -d github.com/pocke/dentaku
+cd $GOPATH/src/github.com/pocke/dentaku/parser
+make
+cd ..
+go install
+```
+
+Usage
+------
+
+```sh
+echo '1+1' | dentaku  # => 2
+```
 
 Syntax
 -------
