@@ -1,6 +1,7 @@
 package eval
 
 import (
+	"fmt"
 	"strconv"
 
 	"github.com/pocke/dentaku/ast"
@@ -12,14 +13,38 @@ type Rational struct {
 	Decom int
 }
 
+func (r Rational) String() string {
+	return fmt.Sprintf("%d/%d", r.Numer, r.Decom)
+}
+
+func (r Rational) Reduce() Rational {
+	n := gcd(r.Numer, r.Decom)
+	return Rational{
+		Numer: r.Numer / n,
+		Decom: r.Decom / n,
+	}
+}
+
+func gcd(m, n int) int {
+	if n == 0 {
+		return m
+	}
+	return gcd(n, m%n)
+}
+
 func Evaluate(a ast.Expression) Rational {
+	ret := evaluate(a)
+	return ret.Reduce()
+}
+
+func evaluate(a ast.Expression) Rational {
 	switch e := a.(type) {
 	case ast.Literal:
 		n, _ := strconv.Atoi(e.Literal)
 		return Rational{Numer: n, Decom: 1}
 	case ast.BinOpExpr:
-		l := Evaluate(e.Left)
-		r := Evaluate(e.Right)
+		l := evaluate(e.Left)
+		r := evaluate(e.Right)
 		switch e.Operator {
 		case '+':
 			return Rational{
