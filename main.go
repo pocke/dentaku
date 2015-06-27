@@ -4,10 +4,12 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/pocke/dentaku/eval"
 	"github.com/pocke/dentaku/parser"
 )
 
 func main() {
 	a := parser.Parse(os.Stdin)
-	fmt.Println(a)
+	ret := eval.Evaluate(a)
+	fmt.Println(ret)
 }
