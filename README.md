@@ -36,7 +36,6 @@ Syntax
 ```ruby
 10-3  # => 7
 5-10  # => -5
--10   # => -10
 ```
 
 ### Multiplication
